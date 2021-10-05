@@ -1,0 +1,26 @@
+<mat-divider inset></mat-divider>
+
+<div class="controls-container">
+  <div class="time-controls">
+    <!-- Start/Pause/Resume button, depending on the state -->
+    <button (click)="onStartPauseResume.emit()" mat-stroked-button color="primary">{{ startPauseButtonText }}</button>
+
+    <!-- Lap button, disabled when the stopwatch is stopped or paused -->
+    <button *ngIf="hasLap" (click)="onAddLap.emit()" mat-stroked-button color="primary" [disabled]="isStopped || isPaused">Lap</button>
+
+    <!-- Reset button, resets everything back to their initial state -->
+    <button (click)="onReset.emit()" mat-stroked-button color="warn" [disabled]="isStopped">Reset</button>
+  </div>
+
+  <div class="utils-controls">
+
+    <!-- toggle alart -->
+    <button *ngIf="hasAlarm" (click)="onToggleAlarm.emit()" mat-icon-button>
+      <mat-icon *ngIf="isAlarmDisabled">notifications_off</mat-icon>
+      <mat-icon *ngIf="!isAlarmDisabled">notifications</mat-icon>
+    </button>
+
+    <!-- toggle button -->
+    <app-toggle-fullscreen></app-toggle-fullscreen>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<mat-card class="timer-container mat-elevation-z0" >
+  <mat-card-content>
+    <!-- timer display. Handles coverting milliseconds and displays them in hh mm ss format -->
+    <p #timerinput (click)="onEdit()"
+      *ngIf="!isEditing"
+      class="timer-display mat-display-4 primary {{ remainingTime <= 0 ? 'timeup' : ''}}"
+    >
+      {{remainingTime | formatTime:'hh'}}<span class="time-symbol">h</span>
+      {{remainingTime | formatTime:'mm'}}<span class="time-symbol">m</span>
+      {{remainingTime | formatTime:'ss'}}<span class="time-symbol">s</span>
+    </p>
+
+    <!-- inputs for hours, minutes and seconds -->
+    <form *ngIf="isEditing" [formGroup]="timerForm" class="timer-form">
+      <mat-form-field class="hours-input" appearance="fill">
+        <mat-label>Hours</mat-label>
+        <input formControlName="hours" matInput maxlength="3" placeholder="Hours">
+        <span matSuffix>h</span>
+      </mat-form-field>
+
+      <mat-form-field class="minutes-input" appearance="fill">
+        <mat-label>Minutes</mat-label>
+        <input formControlName="minutes" matInput maxlength="2" placeholder="Minutes">
+        <span matSuffix>m</span>
+      </mat-form-field>
+
+      <mat-form-field class="seconds-input" appearance="fill">
+        <mat-label>Seconds</mat-label>
+        <input formControlName="seconds" matInput maxlength="2" placeholder="Seconds">
+        <span matSuffix>s</span>
+      </mat-form-field>
+
+      <!-- Done button -->
+      <button [disabled]="timerForm.invalid"
+              (click)="onDone()"
+              class="done-button" type="button"
+              mat-flat-button color="primary"
+      > <mat-icon>add</mat-icon>
+      </button>
+
+      <!-- Error message -->
+      <p *ngIf="timerForm.invalid" class="warn">One or more of the values you entered are invalid</p>
+    </form>
+
+    <!-- Alarm button animation - allows user to dismiss alarm -->
+    <button *ngIf="remainingTime <= 0 && !isAlarmDisabled" class="dismiss-alarm-button" (click)="onDismissAlarm()" mat-icon-button disableRipple>
+      <mat-icon>notifications_active</mat-icon>
+    </button>
+  </mat-card-content>
+
+  <mat-card-actions >
+    <app-timer-controls
+      [isStopped]="isStopped" [isPaused]="isPaused" [hasAlarm]="true" [hasAlarm]="true" [isAlarmDisabled]="isAlarmDisabled"
+      (onStartPauseResume)="onStartPauseResume()" (onReset)="onReset()" (onToggleAlarm)="onToggleAlarm()">
+    </app-timer-controls>
+  </mat-card-actions>
+</mat-card>
+
+<!-- Alart audio -->
+<audio #alarm
+       loop="loop">
+  <source src="/assets/audio/alarm.oga"
+          type="audio/ogg">
+  <source src="/assets/audio/alarm.mp3"
+          type="audio/mp3">
+</audio>

@@ -1,11 +1,26 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TimerPageComponent } from './timer/pages/timer-page/timer-page.component';
+import { RouterModule, Routes } from '@angular/router';
+import { StopwatchComponent } from './pages/stopwatch/stopwatch.component';
+import { TimerComponent } from './pages/timer/timer.component';
 
 const routes: Routes = [
-  { path: 'timer', component: TimerPageComponent, data: {view: 'timer'} },
-  { path: 'stopwatch', component: TimerPageComponent, data: {view: 'stopwatch'} },
-  { path: '', redirectTo: '/timer', pathMatch: 'full'}
+  {
+    path: '',
+    redirectTo: 'timer',
+    pathMatch: 'full'
+  },
+  {
+    path: 'timer',
+    component: TimerComponent
+  },
+  {
+    path: 'stopwatch',
+    component: StopwatchComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'timer'
+  }
 ];
 
 @NgModule({

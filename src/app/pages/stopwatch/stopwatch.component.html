@@ -1,0 +1,18 @@
+<mat-card class="stopwatch-container mat-elevation-z0">
+  <mat-card-content>
+    <!-- stopwatch display. Handles coverting milliseconds and displays them in seconds and milliseconds -->
+    <p class="mat-display-4">
+      {{time | formatTime:'ss'}}<span class="time-symbol">s</span>
+      {{time | formatTime:'SS'}}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <app-timer-controls
+      [isStopped]="isStopped" [isPaused]="isPaused" [hasLap]="true"
+      (onStartPauseResume)="onStartPauseResume()" (onAddLap)="onAddLap()" (onReset)="onReset()"></app-timer-controls>
+  </mat-card-actions>
+</mat-card>
+
+<!-- List of laps -->
+<app-laps-table [stopwatchRecords]="stopwatchRecords"></app-laps-table>

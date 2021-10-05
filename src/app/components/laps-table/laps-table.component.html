@@ -1,0 +1,22 @@
+<mat-table *ngIf="stopwatchRecords.length" [dataSource]="stopwatchRecords" class="mat-elevation-z0">
+  <!-- Rank Column -->
+  <ng-container matColumnDef="rank">
+    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.rank}} </mat-cell>
+  </ng-container>
+
+  <!-- Lap Column -->
+  <ng-container matColumnDef="lap">
+    <mat-header-cell *matHeaderCellDef> Lap </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lap | formatTime:'mm:ss:SS'}} </mat-cell>
+  </ng-container>
+
+  <!-- Split Column -->
+  <ng-container matColumnDef="split">
+    <mat-header-cell *matHeaderCellDef> Split </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.split | formatTime:'mm:ss:SS'}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

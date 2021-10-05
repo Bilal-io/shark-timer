@@ -1,0 +1,121 @@
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 16px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  height: 400px;
+
+  .mat-card-content {
+    margin: 0;
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+  }
+
+  .timer-display {
+    margin: 24px 0;
+
+    // flashing when &.timeup
+    &.timeup {
+      color: #f44336;
+      animation: flash 1s infinite;
+    }
+
+  }
+
+  .timer-form {
+    margin-top: 24px;
+
+    .hours-input, .minutes-input, .seconds-input {
+      max-width: 160px;
+      margin-right: 8px;
+    }
+
+    .done-button {
+      margin-left: 8px;
+
+      mat-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  // add alarm animation to dismiss-alarm-button swinging animation like a pendulum
+  .dismiss-alarm-button {
+    width: 72px;
+    height: 72px;
+    transform-origin: top center;
+    animation: swing 1.5s linear infinite;
+    position: absolute;
+    bottom: 8px;
+
+    mat-icon {
+      font-size: 72px;
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  .warn
+  {
+    color: #f44336;
+  }
+
+  .time-symbol {
+    font-size: 0.5em;
+  }
+
+  //  Animations
+  @keyframes flash {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes swing {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(10deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(10deg);
+    }
+    40% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(-10deg);
+    }
+    70% {
+      transform: rotate(10deg);
+    }
+    80% {
+      transform: rotate(-10deg);
+    }
+    90% {
+      transform: rotate(10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
